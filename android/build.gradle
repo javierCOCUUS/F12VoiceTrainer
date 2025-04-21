@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = "33.0.0"
+        minSdkVersion = 21
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+
+        // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
+        ndkVersion = "23.1.7779620"
+        // Asegurar compatibilidad de versiones de Java/Kotlin
+        kotlin_version = "1.8.0"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    
+
+    
+    
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.4.2")
+        classpath("com.facebook.react:react-native-gradle-plugin:7.4.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+allprojects {
+    repositories {
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+        google()
+        mavenCentral()
+    }
+}
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = '11'
+        }
+    }
+}

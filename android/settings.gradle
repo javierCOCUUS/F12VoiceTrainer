@@ -1,0 +1,19 @@
+rootProject.name = 'F12VoiceTrainer'
+
+def nativeModulesSettingsScript = file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+if (nativeModulesSettingsScript.exists()) {
+    apply from: nativeModulesSettingsScript
+    
+    // Usa un método más compatible
+    if (hasProperty('applyNativeModulesSettingsGradle')) {
+        applyNativeModulesSettingsGradle(settings)
+    } else {
+        // Fallback básico
+        include ':app'
+    }
+} else {
+    include ':app'
+    println "Native modules settings script not found"
+}
+
+includeBuild('../node_modules/@react-native/gradle-plugin')
